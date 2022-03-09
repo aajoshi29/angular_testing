@@ -1,0 +1,37 @@
+<h1>The Angular Component</h1>
+
+<!--Using the Template Binding aka Expression Binding-->
+<div class="container">
+  <strong>{{ name }}</strong>
+  <br />
+  <strong>{{ url }}</strong>
+  <br />
+  <!--The Property Binding (from Component to UI Element)-->
+  <input type="text" class="form-control" [value]="name" />
+  <br />
+  <a [href]="url">WebNetHelper {{ url }}</a>
+  <br />
+  <!--Event Binding, (UI to Component)-->
+  <input type="button" value="Change" (click)="changeName()" />
+</div>
+<br />
+<h3>Two-Way Binding</h3>
+<input type="text" [(ngModel)]="myname" class="form-control" />
+<br />
+<input type="text" [(ngModel)]="myname" class="form-control" />
+<br />
+<input type="text" [(ngModel)]="myname" class="form-control" />
+<br />
+<strong>Length of Entered Value is = {{ strLength }}</strong>
+<br />
+List of Characters as follows and
+<strong>The Selected Character is {{ selectedName }}</strong>
+<select class="form-control" [(ngModel)]="selectedName">
+  <option *ngFor="let n of names" [value]="n">{{ n }}</option>
+</select>
+<br />
+<button (click)="toggle()">Toggle</button>
+<br />
+<strong [hidden]="canShow">I will be shown if canShow=true</strong>
+<br />
+<strong *ngIf="canShow">I will be shown if canShow=true</strong>

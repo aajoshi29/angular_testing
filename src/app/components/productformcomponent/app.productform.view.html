@@ -1,0 +1,125 @@
+<h1 class="text-center pt-4">Testing Angular App</h1>
+<div class="container">
+  <form [formGroup]="formProduct" (ngSubmit)="save()">
+    <div class="form-group pt-2">
+      <label><b>Product Row Id</b></label>
+      <input
+        type="number"
+        class="form-control"
+        formControlName="ProductRowId"
+      />
+      <div
+        class="alert alert-danger mt-2"
+        *ngIf="
+          formProduct.controls['ProductRowId'].dirty &&
+          !formProduct.controls['ProductRowId'].valid
+        "
+      >
+        <p *ngIf="formProduct.controls['ProductRowId'].errors['required']">
+          Product Row Id must not be empty.
+        </p>
+        <p *ngIf="formProduct.controls['ProductRowId'].errors['pattern']">
+          Product Row Id must be numeric only.
+        </p>
+        <p *ngIf="formProduct.controls['ProductRowId'].errors['minlength']">
+          Product Row Id must have 2 digits.
+        </p>
+        <p *ngIf="formProduct.controls['ProductRowId'].errors['maxlength']">
+          Product Row Id must have atmost 8 digits.
+        </p>
+      </div>
+    </div>
+    <div class="form-group pt-2">
+      <label><b>Product Id</b></label>
+      <input type="text" class="form-control" formControlName="ProductId" />
+      <div
+        class="alert alert-danger mt-2"
+        *ngIf="
+          formProduct.controls['ProductId'].dirty &&
+          !formProduct.controls['ProductId'].valid
+        "
+      >
+        <p *ngIf="formProduct.controls['ProductId'].errors['required']">
+          Product Id must not be empty.
+        </p>
+        <p *ngIf="formProduct.controls['ProductId'].errors['pattern']">
+          Product Id can only contain letters, numbers, hyphen and underscore.
+        </p>
+        <p *ngIf="!formProduct.controls['ProductId'].errors['unique']">
+          Product Id must be unique.
+        </p>
+      </div>
+    </div>
+    <div class="form-group pt-2">
+      <label><b>Product Name</b></label>
+      <input type="text" class="form-control" formControlName="ProductName" />
+      <div
+        class="alert alert-danger mt-2"
+        *ngIf="
+          formProduct.controls['ProductName'].dirty &&
+          !formProduct.controls['ProductName'].valid
+        "
+      >
+        <p *ngIf="formProduct.controls['ProductName'].errors['required']">
+          Product Name must not be empty.
+        </p>
+        <p *ngIf="formProduct.controls['ProductName'].errors['pattern']">
+          Product Name must be text only.
+        </p>
+        <p *ngIf="!formProduct.controls['ProductName'].errors['case']">
+          Product Name must have first letter in upper case.
+        </p>
+      </div>
+    </div>
+    <div class="form-group pt-2">
+      <label><b>Description</b></label>
+      <input type="text" class="form-control" formControlName="Description" />
+    </div>
+    <div class="form-group pt-2">
+      <label><b>Base Price</b></label>
+      <input type="text" class="form-control" formControlName="BasePrice" />
+    </div>
+    <div class="form-group pt-2">
+      <label><b>Category</b></label>
+      <select type="text" class="form-select" formControlName="CategoryName">
+        <option value="" disabled selected>Select Category</option>
+        <option *ngFor="let category of categories" [value]="category">
+          {{ category }}
+        </option>
+      </select>
+    </div>
+    <div class="form-group pt-2">
+      <label><b>Manufacturer</b></label>
+      <select type="text" class="form-select" formControlName="Manufacturer">
+        <option value="" disabled selected>Select Manufacturer</option>
+        <option
+          *ngFor="let manufacturer of manufacturers"
+          [value]="manufacturer"
+        >
+          {{ manufacturer }}
+        </option>
+      </select>
+    </div>
+    <div class="form-group mt-4">
+      <input value="Clear" type="reset" class="btn btn-warning me-2" />
+      <input type="submit" value="Save" class="btn btn-success" />
+    </div>
+  </form>
+</div>
+<div class="container mt-4">
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th *ngFor="let col of columnHeaders">{{ col }}</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="products.length > 0">
+      <tr *ngFor="let prd of products">
+        <td *ngFor="let col of columnHeaders">{{ prd[col] }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="products.length === 0" class="p-4 text-center">
+    <b>No products found.</b>
+  </p>
+</div>
